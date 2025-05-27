@@ -70,11 +70,6 @@ async function copyDirectory(srcDir, destDir) {
       console.log(`🔗 Injected: ${file} → #${id}`);
     }
 
-    html = html.replace(
-      /<script[^>]*src="scripts\/app\.js"[^>]*><\/script>/,
-      ""
-    );
-
     await writeFile(`${outDir}/index.html`, html);
 
     console.log("✅ Build completed successfully!");
