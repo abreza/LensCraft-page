@@ -1,8 +1,15 @@
-// build.js
-import { readFile, writeFile, mkdir } from "fs/promises";
-import { resolve } from "path";
+import {
+  readFile,
+  writeFile,
+  mkdir,
+  readdir,
+  stat,
+  copyFile,
+} from "fs/promises";
+import { resolve, join, relative } from "path";
 
 const root = resolve("src");
+const publicDir = resolve("public");
 const outDir = resolve("dist");
 
 const sections = [
@@ -12,27 +19,68 @@ const sections = [
   { file: "introduction.html", id: "introduction-container" },
 ];
 
-(async () => {
-  // 1️⃣ make sure dist/ exists
-  await mkdir(outDir, { recursive: true });
+async function copyDirectory(srcDir, destDir) {
+  try {
+    await mkdir(destDir, { recursive: true });
 
-  // 2️⃣ read the template
-  let html = await readFile(`${root}/index.html`, "utf8");
+    const entries = await readdir(srcDir);
 
-  // 3️⃣ inject the partials
-  for (const { file, id } of sections) {
-    const snippet = await readFile(`${root}/${file}`, "utf8");
-    html = html.replace(
-      new RegExp(`<div[^>]*id="${id}"[^>]*>\\s*</div>`),
-      snippet.trim()
-    );
+    for (const entry of entries) {
+      const srcPath = join(srcDir, entry);
+      const destPath = join(destDir, entry);
+
+      const stats = await stat(srcPath);
+
+      if (stats.isDirectory()) {
+        await copyDirectory(srcPath, destPath);
+      } else {
+        await copyFile(srcPath, destPath);
+        console.log(
+          `📁 Copied: ${relative(process.cwd(), srcPath)} → ${relative(
+            process.cwd(),
+            destPath
+          )}`
+        );
+      }
+    }
+  } catch (error) {
+    if (error.code !== "ENOENT") {
+      throw error;
+    }
+    console.log(`⚠️  Public directory not found: ${publicDir}`);
   }
+}
 
-  // 4️⃣ strip the loader script (no run-time fetches any more)
-  html = html.replace(/<script[^>]*src="scripts\/app\.js"[^>]*><\/script>/, "");
+(async () => {
+  try {
+    await mkdir(outDir, { recursive: true });
 
-  // 5️⃣ write the finished file
-  await writeFile(`${outDir}/index.html`, html);
+    console.log("📂 Copying public files...");
+    await copyDirectory(publicDir, outDir);
 
-  console.log("✅ dist/index.html created");
+    console.log("🔨 Processing HTML sections...");
+    let html = await readFile(`${root}/index.html`, "utf8");
+
+    for (const { file, id } of sections) {
+      const snippet = await readFile(`${root}/${file}`, "utf8");
+      html = html.replace(
+        new RegExp(`<div[^>]*id="${id}"[^>]*>\\s*</div>`),
+        snippet.trim()
+      );
+      console.log(`🔗 Injected: ${file} → #${id}`);
+    }
+
+    html = html.replace(
+      /<script[^>]*src="scripts\/app\.js"[^>]*><\/script>/,
+      ""
+    );
+
+    await writeFile(`${outDir}/index.html`, html);
+
+    console.log("✅ Build completed successfully!");
+    console.log(`📄 dist/index.html created`);
+  } catch (error) {
+    console.error("❌ Build failed:", error.message);
+    process.exit(1);
+  }
 })();
