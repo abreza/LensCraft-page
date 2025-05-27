@@ -1,0 +1,17 @@
+{
+  "name": "lenscraft-page",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/abreza/LensCraft-page#readme",
+  "bugs": {
+    "url": "https://github.com/abreza/LensCraft-page/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abreza/LensCraft-page.git"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "preview": "npx serve dist"
+  }
+}
