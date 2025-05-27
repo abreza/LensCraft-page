@@ -1,0 +1,63 @@
+<section id="introduction">
+  <h2>1 Introduction</h2>
+  <p>
+    The language of cinematography extends far beyond simple camera operations,
+    encompassing a rich representation of visual storytelling elements that can
+    express distinct styles, perceived motions, emotional resonances, and visual
+    perceptions. While this sophisticated language holds the capacity to
+    translate a director's narrative vision into precise camera movements—just
+    as it does in real-world filmmaking—it demands exact alignment and precise
+    execution from automated systems. Each camera movement must not merely
+    follow rules, but rather embody the director's intent with the finesse of an
+    experienced professional cinematographer, whether capturing the subtle
+    tension in a dramatic scene or the dynamic energy of an action sequence.
+  </p>
+  <p>
+    Current automated approaches fall into two limiting categories. Traditional
+    methods sacrifice creative potential for predictability, reducing the rich
+    language of cinematography to mechanical executions of predefined rules,
+    constraints, and objectives. On the other hand, more recent learning-based
+    approaches, while capable of generating complex camera sequences, often get
+    lost in this complexity due to imbalanced training data distributions and
+    insufficient richness in their learning examples. As a result, these methods
+    struggle to maintain professional quality while staying faithful to user
+    instructions, producing sophisticated sequences that drift from the intended
+    cinematographic direction. This fundamental disconnect becomes particularly
+    apparent when handling diverse filming scenarios, where the balance between
+    professional execution and precise alignment with user intent becomes
+    crucial.
+  </p>
+  <p>
+    Additionally, one crucial aspect that prior models often overlook is the
+    impact of subject volume. In real-world filmmaking, the scale and physical
+    presence of the subject—whether filming from an ant's perspective or
+    capturing a building—significantly influence the camera's behavior and
+    trajectory. However, most prior works simplify the subject by representing
+    it as a point or by modeling it in a fixed specific form. This
+    oversimplification, due to limitations in dataset complexity, fails to
+    capture the true dynamics of subject volume, which is essential for
+    generating realistic and context-aware camera movements.
+  </p>
+  <p>
+    This fundamental disconnect motivated us to develop LensCraft, a novel
+    approach that bridges the gap between professional cinematographic execution
+    and precise user control. In addressing this challenge, we first identified
+    two key obstacles: the absence of a unified, comprehensive standard for a
+    representative cinematographic language, and the lack of a balanced,
+    large-scale, volume-aware dataset that covers the full spectrum of camera
+    movements. To overcome these challenges, we designed a standard
+    cinematography language to provide a unified foundation for our approach and
+    developed the first fully open-source, carefully designed simulation
+    framework to generate a diverse and well-balanced dataset, serving as the
+    foundational pillars required for our model.
+  </p>
+  <p>
+    Leveraging this backbone to combine the solidity of traditional rule-based
+    methods with the creativity of neural models, we designed a lightweight
+    transformer-based architecture that learns and generates complex simulated
+    movements, using only a text prompt or optional key frames, enabling it to
+    produce robust and creatively aligned outputs. To accommodate a wider range
+    of user instructions, we also provide an appendix that converts arbitrary
+    user prompts into our standardized cinematographic description.
+  </p>
+</section>
