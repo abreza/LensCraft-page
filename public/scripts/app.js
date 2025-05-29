@@ -2,11 +2,21 @@ let currentSlide = 0;
 let totalSlides = 0;
 
 function initializeCarousel() {
+  const slidesContainer = document.querySelector(".carousel-slides");
+  if (!slidesContainer) return;
+
+  slidesContainer.innerHTML = pipelineData
+    .map((pipeline) => createPipelineSlide(pipeline))
+    .join("");
+
   const slides = document.querySelectorAll(".carousel-slide");
   totalSlides = slides.length;
 
-  generateIndicators();
+  if (slides.length > 0) {
+    slides[0].classList.add("active");
+  }
 
+  generateIndicators();
   updateCarousel();
 }
 
@@ -20,7 +30,10 @@ function generateIndicators() {
     const indicator = document.createElement("button");
     indicator.className = "carousel-indicator";
     indicator.onclick = () => goToSlide(i);
-    indicator.setAttribute("aria-label", `Go to slide ${i + 1}`);
+    indicator.setAttribute(
+      "aria-label",
+      `Go to slide ${i + 1} - ${pipelineData[i]?.title || "Pipeline"}`
+    );
 
     if (i === 0) {
       indicator.classList.add("active");

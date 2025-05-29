@@ -1,29 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 150">
-    <!-- Car - positioned stationary in center -->
-    <g id="car" transform="scale(-1,1)">
-        <!-- Car body - simplified shape -->
-        <path d="M 30,70 C 32.5,50 50,45 70,45 C 110,45 130,45 150,45 C 162.5,45 165,60 160,70 C 155,80 35,80 30,70 Z"
+    <!-- Car - coordinates directly adjusted without transform -->
+    <g id="car" transform="translate(-300,0)">
+        <rect x="135" y="25" width="140" height="60" fill="none" stroke="#E74C3C" stroke-width="3"
+            stroke-dasharray="8,4" rx="5">
+            <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite" />
+        </rect>
+
+        <!-- Detection label -->
+        <rect x="240" y="20" width="35" height="15" fill="#E74C3C" rx="2" />
+        <text x="257.5" y="31" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10"
+            font-weight="bold">CAR</text>
+
+        <!-- Car body -->
+        <path
+            d="M 270,70 C 267.5,50 250,45 230,45 C 190,45 170,45 150,45 C 137.5,45 135,60 140,70 C 145,80 265,80 270,70 Z"
             fill="#5DC1EB" stroke="none" />
 
-        <!-- Windows area - simplified -->
-        <path d="M 70,45 C 70,35 75,30 85,30 C 110,30 120,30 125,45" fill="#2D3D4D" stroke="none" />
+        <!-- Windows area -->
+        <path d="M 230,45 C 230,35 225,30 215,30 C 190,30 180,30 175,45" fill="#2D3D4D" stroke="none" />
 
-        <!-- Door line - simplified -->
-        <path d="M 85,45 C 85,50 82.5,65 82.5,70" fill="none" stroke="#41A3C9" stroke-width="2" />
+        <!-- Door line -->
+        <path d="M 215,45 C 215,50 217.5,65 217.5,70" fill="none" stroke="#41A3C9" stroke-width="2" />
 
-        <!-- Wheels - simplified -->
-        <circle cx="50" cy="70" r="12.5" fill="#6B7784" stroke="black" stroke-width="2" />
-        <circle cx="50" cy="70" r="6" fill="#505A68" />
+        <!-- Wheels -->
+        <circle cx="250" cy="70" r="12.5" fill="#6B7784" stroke="black" stroke-width="2" />
+        <circle cx="250" cy="70" r="6" fill="#505A68" />
 
-        <circle cx="140" cy="70" r="12.5" fill="#6B7784" stroke="black" stroke-width="2" />
-        <circle cx="140" cy="70" r="6" fill="#505A68" />
+        <circle cx="160" cy="70" r="12.5" fill="#6B7784" stroke="black" stroke-width="2" />
+        <circle cx="160" cy="70" r="6" fill="#505A68" />
 
-        <!-- Headlight -->
-        <circle cx="32.5" cy="57.5" r="4" fill="#E74C3C" />
+        <!-- Headlight (now on the right side) -->
+        <circle cx="267.5" cy="57.5" r="4" fill="#E74C3C" />
 
-        <!-- Taillight -->
-        <circle cx="157.5" cy="57.5" r="4" fill="#E67E22" />
+        <!-- Taillight (now on the left side) -->
+        <circle cx="142.5" cy="57.5" r="4" fill="#E67E22" />
     </g>
+
+    <!-- Car motion path - straight line from left to right -->
+    <path id="carPath" d="M 200,0 L 300,10" fill="none" stroke="none" />
+
+    <!-- Animation for the car to move forward -->
+    <animateMotion xlink:href="#car" dur="5s" repeatCount="indefinite">
+        <mpath xlink:href="#carPath" />
+    </animateMotion>
 
     <!-- Simple Movie Camera - positioned for tilt down rotation -->
     <g id="camera" transform="translate(100, 60)">
@@ -45,8 +64,4 @@
 
     <path id="carPath" d="M 200,0 L 300,10" fill="none" stroke="none" />
 
-    <!-- Subtle car movement - slight forward motion -->
-    <animateMotion xlink:href="#car" dur="5s" repeatCount="indefinite">
-        <mpath xlink:href="#carPath" />
-    </animateMotion>
 </svg>
