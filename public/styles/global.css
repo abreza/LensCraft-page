@@ -41,7 +41,6 @@ header {
   text-align: center;
   margin-bottom: 40px;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--border-color);
 }
 
 h1 {
@@ -63,7 +62,6 @@ h1 {
 .author-info {
   text-align: center;
   margin-top: 15px;
-  margin-bottom: 25px;
 }
 .author-info p {
   margin: 0.3em 0;
@@ -260,4 +258,78 @@ section {
   }
 }
 
+.resources-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
 
+.resource-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--container-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--primary-text-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.resource-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.resource-btn svg {
+  flex-shrink: 0;
+}
+
+.resource-btn.coming-soon {
+  background: #f8f9fa;
+  border-color: #dee2e6;
+  color: #6c757d;
+  cursor: default;
+}
+
+.resource-btn.coming-soon:hover {
+  transform: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-color: #ffa726;
+  color: #f57c00;
+}
+
+.coming-soon-tag {
+  background: linear-gradient(135deg, #ffa726, #ff9800);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .resources-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .resource-btn {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+}

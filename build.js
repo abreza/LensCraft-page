@@ -15,6 +15,7 @@ const outDir = resolve("dist");
 const sections = [
   { file: "header.html", id: "header-container" },
   { file: "abstract.html", id: "abstract-container" },
+  { file: "resources.html", id: "resources-container" },
   { file: "pipeline.html", id: "pipeline-container" },
   { file: "introduction.html", id: "introduction-container" },
 ];

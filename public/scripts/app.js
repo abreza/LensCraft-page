@@ -1,5 +1,34 @@
 let currentSlide = 0;
-const totalSlides = 3;
+let totalSlides = 0;
+
+function initializeCarousel() {
+  const slides = document.querySelectorAll(".carousel-slide");
+  totalSlides = slides.length;
+
+  generateIndicators();
+
+  updateCarousel();
+}
+
+function generateIndicators() {
+  const indicatorContainer = document.querySelector(".carousel-indicators");
+  if (!indicatorContainer) return;
+
+  indicatorContainer.innerHTML = "";
+
+  for (let i = 0; i < totalSlides; i++) {
+    const indicator = document.createElement("button");
+    indicator.className = "carousel-indicator";
+    indicator.onclick = () => goToSlide(i);
+    indicator.setAttribute("aria-label", `Go to slide ${i + 1}`);
+
+    if (i === 0) {
+      indicator.classList.add("active");
+    }
+
+    indicatorContainer.appendChild(indicator);
+  }
+}
 
 function updateCarousel() {
   const slides = document.querySelectorAll(".carousel-slide");
@@ -23,20 +52,23 @@ function updateCarousel() {
 }
 
 function changeSlide(direction) {
+  if (totalSlides === 0) return;
   currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
   updateCarousel();
 }
 
 function goToSlide(slideIndex) {
-  currentSlide = slideIndex;
-  updateCarousel();
+  if (slideIndex >= 0 && slideIndex < totalSlides) {
+    currentSlide = slideIndex;
+    updateCarousel();
+  }
 }
 
 window.changeSlide = changeSlide;
 window.goToSlide = goToSlide;
 
 document.addEventListener("DOMContentLoaded", async function () {
-  updateCarousel();
+  initializeCarousel();
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") changeSlide(-1);
