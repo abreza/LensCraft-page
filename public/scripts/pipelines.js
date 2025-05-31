@@ -15,7 +15,7 @@ const pipelineData = [
     },
     processing: [
       {
-        label: "LLM Translation",
+        label: "Translation",
         color: "#3498db",
       },
       {
@@ -77,7 +77,7 @@ const pipelineData = [
     },
     processing: [
       {
-        label: "LLM Translation",
+        label: "Translation",
         color: "#3498db",
       },
       {
@@ -139,7 +139,7 @@ const pipelineData = [
     },
     processing: [
       {
-        label: "LLM Translation",
+        label: "Translation",
         color: "#3498db",
       },
       {
