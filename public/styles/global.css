@@ -519,3 +519,34 @@ section {
     font-size: 1.5rem;
   }
 }
+
+.demo-video-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.demo-video-container h3 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  font-family: var(--font-serif);
+}
+
+.demo-video-container video {
+  background: #000;
+  border: 1px solid var(--border-color);
+}
+
+.resources-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .demo-video-container video {
+    width: 100%;
+    height: auto;
+  }
+}
