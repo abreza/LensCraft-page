@@ -17,18 +17,65 @@
       <div id="resources-container"></div>
       <div id="abstract-container"></div>
       <div id="pipeline-container"></div>
-      <figure>
-        <img
-          src="/images/simulation.png"
-          alt="The data generation pipeline illustrating the hierarchical transformation of user intent into camera trajectories in simulation."
-          style="width: 100%; height: auto"
-        />
-        <figcaption>
-          Figure 1: The data generation pipeline illustrating the hierarchical
-          transformation of user intent into camera trajectories in simulation.
-        </figcaption>
-      </figure>
+      <section class="overview-images">
+        <h2>LensCraft at a Glance</h2>
+
+        <figure>
+          <img
+            src="/images/lensCraft.png"
+            alt="High-level user workflow: prompt + key-frames → camera trajectory"
+            loading="lazy"
+            style="width: 100%"
+          />
+          <figcaption>
+            <strong>Figure&nbsp;1.</strong> <em>User-facing workflow.</em> A
+            director writes a free-form description and drops a handful of green
+            camera key-frames in the scene. LensCraft's translator converts the
+            prose into a Standard Cinematography Description, then the
+            trajectory generator outputs a smooth red path (blue dots indicate
+            interpolated poses) that respects both cinematic intent and physical
+            constraints.
+          </figcaption>
+        </figure>
+      </section>
       <div id="introduction-container"></div>
+      <section class="overview-images">
+        <figure>
+          <img
+            src="/images/simulation.png"
+            alt="Synthetic-data simulation: translator → simulator → trajectories"
+            loading="lazy"
+            style="width: 100%"
+          />
+          <figcaption>
+            <strong>Figure&nbsp;2.</strong>
+            <em>Simulation stage for dataset creation.</em> The translator
+            decomposes each prompt into (i) a high-level cinematography intent
+            and (ii) fine-grained numeric parameters for the simulator. The
+            Unity engine then generates synchronised subject motion and matching
+            camera poses, providing noise-free supervision for training.
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img
+            src="/images/training.png"
+            alt="Training stage: masked auto-encoder reconstructs full trajectory"
+            loading="lazy"
+            style="width: 100%"
+          />
+          <figcaption>
+            <strong>Figure&nbsp;3.</strong>
+            <em>Masked-auto-encoder training pipeline.</em> The encoder receives
+            the subject's volume and trajectory, a randomly masked and noised
+            camera path, and the CLIP embedding of the cinematography prompt.
+            The decoder, guided only by that high-level prompt, reconstructs the
+            complete, smooth camera motion. Losses on initial pose, relative
+            geometry, speed profile and CLIP alignment enforce both physical
+            plausibility and semantic fidelity.
+          </figcaption>
+        </figure>
+      </section>
     </div>
     <script src="/scripts/pipelines.js"></script>
     <script src="/scripts/app.js"></script>
